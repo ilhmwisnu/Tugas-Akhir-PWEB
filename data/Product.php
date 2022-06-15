@@ -46,4 +46,4 @@ class Product{
 
 
 // $dbs = ;
-$data = new Product($db);
+$product = new Product($db);
