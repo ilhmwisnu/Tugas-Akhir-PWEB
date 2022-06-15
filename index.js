@@ -2,7 +2,6 @@ let currentPage = 1;
 let totalPage = 10;
 
 let pagination = $("#pagination");
-console.log(pagination[0]);
 
 function renderPagination(currentPage, totalPage) {
     pagination.html(
@@ -51,12 +50,10 @@ function renderPagination(currentPage, totalPage) {
         changePage(e)
     })
     $(".first").click((e)=>{
-        console.log("start")
         currentPage = 1
         renderPagination(currentPage, totalPage)
     })
     $(".end").click((e)=>{
-        console.log("end")
         currentPage = totalPage
         renderPagination(currentPage, totalPage)
     })
@@ -67,7 +64,15 @@ renderPagination(currentPage, totalPage)
 
 function changePage(e){
     currentPage = parseInt(e.target.id.slice(4))
-    // console.log(e.target.id.slice(4))
     pagination.html("")
     renderPagination(currentPage, totalPage)
 }
+
+$("#sort").change(function (e) { 
+    console.log(e.target.value)
+    
+});
+
+$("#search").keyup(function (e) { 
+    console
+});
