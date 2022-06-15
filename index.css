@@ -10,3 +10,7 @@ body {
     /* width: max-content; */
     object-fit: cover;
 }
+
+.pageBtn, .first, .end{
+    cursor: pointer;
+}

@@ -6,7 +6,7 @@ console.log(pagination[0]);
 
 function renderPagination(currentPage, totalPage) {
     pagination.html(
-        `<div class="px-4 py-2 border border-dark rounded-2 bg-light">|<</div>`
+        `<div class=" first px-4 py-2 border border-dark rounded-2 bg-light">|<</div>`
     );
     if (currentPage < 3) {
         for (let index = 1; index < 1 + 5; index++) {
@@ -34,7 +34,7 @@ function renderPagination(currentPage, totalPage) {
         for (let index = currentPage - 2; index < currentPage + 3; index++) {
             pagination.html(
                 pagination.html() +
-                    `<div id="page${index}" class="pageBtn px-4 py-2  ${
+                    `<div id="page${index}" class=" pageBtn px-4 py-2  ${
                         index == currentPage
                             ? "bg-black text-white "
                             : "bg-light border border-dark"
@@ -44,11 +44,21 @@ function renderPagination(currentPage, totalPage) {
     }
     pagination.html(
         pagination.html() +
-            `<div class="px-4 py-2 border border-dark rounded-2 bg-light">>|</div>`
+            `<div class=" end px-4 py-2 border border-dark rounded-2 bg-light">>|</div>`
     );
 
     $(".pageBtn").click((e)=>{
         changePage(e)
+    })
+    $(".first").click((e)=>{
+        console.log("start")
+        currentPage = 1
+        renderPagination(currentPage, totalPage)
+    })
+    $(".end").click((e)=>{
+        console.log("end")
+        currentPage = totalPage
+        renderPagination(currentPage, totalPage)
     })
 }
 
