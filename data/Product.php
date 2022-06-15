@@ -1,7 +1,7 @@
 <?php
 
-
-require_once('./database.php');
+require_once('../config/db.php');
+require_once('database.php');
 
 
 class Product{
@@ -9,8 +9,21 @@ class Product{
     protected $table = "product";
 
 
-    public function __construct($dbs){
-        $this->$dbs = $dbs;        
+    public function __construct($db){
+        $this->dbs = new Database($db);   
+
+    }
+
+    
+    public function get(){
+        // var_dump($this->dbs);
+        return $this->dbs->get_all('product');
+    }
+
+    public function count_page(){
+        $data = $this->dbs->get_all('product');
+        $jumlah = count($data);
+        return $jumlah;
     }
 
     public function addData($data){
@@ -30,3 +43,7 @@ class Product{
         }
     }
 }
+
+
+// $dbs = ;
+$data = new Product($db);
