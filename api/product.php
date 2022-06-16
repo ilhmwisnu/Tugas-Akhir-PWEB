@@ -16,7 +16,14 @@ if(isset($_GET['sort'])){
 }else if(isset($_GET['keyword'])){
     $product->get_search($_GET['keyword']);
 }else if(isset($_GET['action'])){
-    $product->addData($_POST);
+    if ($_GET['action']== "create") {
+        $product->addData($_POST);
+    }else if ($_GET['action']== "update") {
+        // update
+    }else if ($_GET['action']== "delete") {
+        $product->delete($_POST["id"]);
+    }
+
 }else{
     $product->get();
 }

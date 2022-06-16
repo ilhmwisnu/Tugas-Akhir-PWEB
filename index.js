@@ -1,6 +1,6 @@
 let currentPage = 1;
 let totalPage = 1;
-let globalData = []
+let globalData = [];
 let pagination = $("#pagination");
 let productContainer = $("#productContainer");
 
@@ -12,25 +12,21 @@ function getData(keyword, sort) {
     } else if (keyword != "") {
         url = `./api/product.php?keyword=${keyword}`;
     }
-    console.log(url)
+    // console.log(url);
     $.get(url, (data) => {
         globalData = JSON.parse(data).data;
         // console.log(globalData.length);
         totalPage = Math.ceil(globalData.length / 8);
         // console.log(totalPage);
-        console.log(globalData);
+        // console.log(globalData);
         renderPagination(currentPage, totalPage);
         renderCard(currentPage, totalPage, globalData);
     });
 }
 
 function renderCard(currentPage, totalPage, data) {
-    // console.log(currentPage)
-    // console.log(totalPage == currentPage)
-    // console.log(data)
-    if ((data.length < 8) ) {
-        for (let i in data) {
-            let e = data[i];
+    if (data.length < 8) {
+        data.forEach((e) => {
             productContainer.html(
                 productContainer.html() +
                     productCard(
@@ -42,24 +38,9 @@ function renderCard(currentPage, totalPage, data) {
                         e.kategori
                     )
             );
-        }
-    }else if ((currentPage == totalPage)) {
-        // for (let i in data.slice((currentPage-1)*8)) {
-        //     let e = data[i];
-        //     console.log(e)
-        //     productContainer.html(
-        //         productContainer.html() +
-        //             productCard(
-        //                 e.id,
-        //                 e.name,
-        //                 e.image,
-        //                 e.price,
-        //                 e.size,
-        //                 e.kategori
-        //             )
-        //     );
-        // }
-        data.slice((currentPage-1)*8).forEach(e => {
+        });
+    } else if (currentPage == totalPage) {
+        data.slice((currentPage - 1) * 8).forEach((e) => {
             productContainer.html(
                 productContainer.html() +
                     productCard(
@@ -73,8 +54,9 @@ function renderCard(currentPage, totalPage, data) {
             );
         });
     } else {
-        for (const i in data.slice(currentPage, currentPage+8)) {
-            let e = data[i];
+        let start = (currentPage - 1) * 8;
+        let end = (currentPage - 1) * 8 + 8;
+        data.slice(start, end).forEach((e) => {
             productContainer.html(
                 productContainer.html() +
                     productCard(
@@ -86,7 +68,7 @@ function renderCard(currentPage, totalPage, data) {
                         e.kategori
                     )
             );
-        }
+        });
     }
     productContainer.html();
 }
@@ -111,7 +93,7 @@ function productCard(id, name, imgUrl, price, size, kategori) {
             </h5>
             <p class="card-text text-center">
                 Size : <span>${size}</span>
-                <br />id :${id}<br/>
+                <br />${kategori}<br/>
                 <strong class="text-center">Rp ${price}</strong>
             </p>
             <div class="text-center">
@@ -120,7 +102,7 @@ function productCard(id, name, imgUrl, price, size, kategori) {
                     class="btn btn-primary mx-auto "
                     >Edit</a
                 >
-                <button class="btn btn-danger m-1">Delete</button>
+                <button class="btn btn-danger m-1" onclick="deleteData(${id})">Delete</button>
             </div>
             </div>
             </div>
@@ -160,10 +142,16 @@ function renderPagination(currentPage, totalPage) {
     });
     $(".first").click((e) => {
         currentPage = 1;
+        pagination.html("");
+        productContainer.html("");
+        renderCard(currentPage, totalPage, globalData);
         renderPagination(currentPage, totalPage);
     });
     $(".end").click((e) => {
         currentPage = totalPage;
+        pagination.html("");
+        productContainer.html("");
+        renderCard(currentPage, totalPage, globalData);
         renderPagination(currentPage, totalPage);
     });
 }
@@ -171,8 +159,8 @@ function renderPagination(currentPage, totalPage) {
 function changePage(e) {
     currentPage = parseInt(e.target.id.slice(4));
     pagination.html("");
-    productContainer.html('')
-    renderCard(currentPage,totalPage,globalData)
+    productContainer.html("");
+    renderCard(currentPage, totalPage, globalData);
     renderPagination(currentPage, totalPage);
 }
 
@@ -189,3 +177,16 @@ $("#search").keyup(function (e) {
 });
 
 getData("", "");
+
+function deleteData(id) {
+    console.log("ok");
+    $.ajax({
+        type: "POST",
+        url: `./api/product.php?action=delete`,
+        data: {
+            id: id,
+        },
+    });
+    productContainer.html("");
+    getData("", "");
+}
