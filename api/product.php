@@ -12,11 +12,12 @@ if(isset($_GET['sort'])){
     }else{
         $product->get_desc();
     }
+// like
 }else if(isset($_GET['keyword'])){
     $product->get_search($_GET['keyword']);
-// like
+}else if(isset($_GET['action'])){
+    $product->addData($_POST);
 }else{
-    
     $product->get();
 }
 

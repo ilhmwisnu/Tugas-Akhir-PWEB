@@ -38,6 +38,10 @@ class Database{
 
         
     }
+
+    public function delete($id){
+        return $this->db->query("DELETE from product WHERE id = $id");
+    }
 }
 
 $dbs = new Database($db);

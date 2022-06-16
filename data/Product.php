@@ -88,6 +88,23 @@ class Product{
         }
     }
 
+    public function delete($id){
+        try{
+            if($this->dbs->delete($id)){
+                echo json_encode([
+                    "status" => 200,
+                    "message" => "Berhasil didelete"
+                ]);
+            }
+        }catch(\Exception $e){
+            http_response_code(500);
+            echo json_encode([
+                "status" => 500,
+                "error" => $e->getMessage()
+            ]);   
+        }        
+    }
+
     public function addData($data){
         try{
             if($this->dbs->insert($data, $this->table)){
