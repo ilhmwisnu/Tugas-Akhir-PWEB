@@ -7,7 +7,7 @@ require_once('../config/db.php');
 
 // sort
 if(isset($_GET['sort'])){
-    if(strtolower($_GET['sort']) == 'ASC'){
+    if(strtolower($_GET['sort']) == 'asc'){
         $product->get_asc();
     }else{
         $product->get_desc();

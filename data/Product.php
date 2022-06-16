@@ -21,7 +21,7 @@ class Product{
             echo json_encode([
                 "status" => 200,
                 "message" => "Data berhasil didapatkan",
-                "data" => $this->dbs->get_all('product p JOIN category c ON p.kategori_id = c.id ')
+                "data" => $this->dbs->query('SELECT p.id, p.name, c.kategori, p.size, p.price, p.image FROM product p JOIN category c ON p.kategori_id = c.id ')
             ]);
         }catch(\Exception $e){
             http_response_code(500);
@@ -39,7 +39,7 @@ class Product{
             echo json_encode([
                 "status" => 200,
                 "message" => "Data berhasil didapatkan",
-                "data" => $this->dbs->get_all('product order by price ASC')
+                "data" => $this->dbs->get_all('product p JOIN category c ON p.kategori_id = c.id  order by price ASC')
             ]);
         }catch(\Exception $e){
             http_response_code(500);
@@ -57,7 +57,7 @@ class Product{
             echo json_encode([
                 "status" => 200,
                 "message" => "Data berhasil didapatkan",
-                "data" => $this->dbs->get_all('product order by price DESC')
+                "data" => $this->dbs->get_all('product p JOIN category c ON p.kategori_id = c.id  order by price DESC')
             ]);
         }catch(\Exception $e){
             http_response_code(500);

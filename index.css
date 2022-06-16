@@ -6,7 +6,7 @@ body {
 
 .img {
     background-image: url(https://picsum.photos);
-    height: auto;
+    height: 300px;
     /* width: max-content; */
     object-fit: cover;
 }
