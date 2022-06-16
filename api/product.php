@@ -4,19 +4,21 @@ require_once("../data/Product.php");
 require_once('../config/db.php');
 
 
-if(isset($_GET['sort'])){
-    // header("Content-type:application/json");
-    echo json_encode([
-        "data" => $product->get(),
-        "pagination" => $pagination,
-        "count" => $data->count_page()
-    ]);
-}else{
-    // header("Content-type:application/json");
-    echo json_encode([
-        "data" => $product->get(),
-    ]);
 
+// sort
+if(isset($_GET['sort'])){
+    if(strtolower($_GET['sort']) == 'ASC'){
+        $product->get_asc();
+    }else{
+        $product->get_desc();
+    }
+// like
+}else if(isset($_GET['keyword'])){
+    $product->get_search($_GET['keyword']);
+}else if(isset($_GET['action'])){
+    $product->addData($_POST);
+}else{
+    $product->get();
 }
 
 

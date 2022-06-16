@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Jun 2022 pada 16.49
+-- Waktu pembuatan: 15 Jun 2022 pada 16.58
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -29,8 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL
+  `kategori` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `category`
+--
+
+INSERT INTO `category` (`id`, `kategori`) VALUES
+(1, 'Sport'),
+(2, 'Casual');
 
 -- --------------------------------------------------------
 
@@ -53,7 +61,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `image`, `price`, `description`, `size`, `kategori_id`) VALUES
-(1, 'Asus X441BA', 'https://akcdn.detik.net.id/visual/2020/06/02/09fb4d2c-e9d4-4949-b26d-969983c4bd54_169.jpeg?w=650', 3600000, 'Dalam blog Tokopedia, Asus X441BA adalah laptop yang tepat untuk mendukung kebutuhan sehari-hari dengan harga yang terjangkau. Asus X441BA dilengkapi prosesor AMD Dual-Core A4 seri 9125 generasi Stoney Ridge dan RAM 4GB DDR4, serta HDD 500GB.', '', 0);
+(1, 'Asus X441BA', 'https://akcdn.detik.net.id/visual/2020/06/02/09fb4d2c-e9d4-4949-b26d-969983c4bd54_169.jpeg?w=650', 3600000, 'Dalam blog Tokopedia, Asus X441BA adalah laptop yang tepat untuk mendukung kebutuhan sehari-hari dengan harga yang terjangkau. Asus X441BA dilengkapi prosesor AMD Dual-Core A4 seri 9125 generasi Stoney Ridge dan RAM 4GB DDR4, serta HDD 500GB.', '31,32,33,34', 1);
+INSERT INTO `product` (`id`, `name`, `image`, `price`, `description`, `size`, `kategori_id`) VALUES
+(2, 'HP X441BA', 'https://akcdn.detik.net.id/visual/2020/06/02/09fb4d2c-e9d4-4949-b26d-969983c4bd54_169.jpeg?w=650', 3600000, 'Dalam blog Tokopedia, Asus X441BA adalah laptop yang tepat untuk mendukung kebutuhan sehari-hari dengan harga yang terjangkau. Asus X441BA dilengkapi prosesor AMD Dual-Core A4 seri 9125 generasi Stoney Ridge dan RAM 4GB DDR4, serta HDD 500GB.', '31,32,33,34', 1);
 
 --
 -- Indexes for dumped tables
@@ -79,7 +89,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT untuk tabel `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `product`
