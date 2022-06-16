@@ -16,14 +16,76 @@ class Product{
 
     
     public function get(){
-        // var_dump($this->dbs);
-        return $this->dbs->get_all('product');
+        try{
+            http_response_code(200);
+            echo json_encode([
+                "status" => 200,
+                "message" => "Data berhasil didapatkan",
+                "data" => $this->dbs->get_all('product p JOIN category c ON p.kategori_id = c.id ')
+            ]);
+        }catch(\Exception $e){
+            http_response_code(500);
+            echo json_encode([
+                "status" => 500,
+                "message" => $e->getMessage(),
+                "data" => []
+            ]);
+        }
     }
 
-    public function count_page(){
-        $data = $this->dbs->get_all('product');
-        $jumlah = count($data);
-        return $jumlah;
+    public function get_asc(){
+        try{
+            http_response_code(200);
+            echo json_encode([
+                "status" => 200,
+                "message" => "Data berhasil didapatkan",
+                "data" => $this->dbs->get_all('product order by price ASC')
+            ]);
+        }catch(\Exception $e){
+            http_response_code(500);
+            echo json_encode([
+                "status" => 500,
+                "message" => $e->getMessage(),
+                "data" => []
+            ]);
+        }
+    }
+
+    public function get_desc(){
+        try{
+            http_response_code(200);
+            echo json_encode([
+                "status" => 200,
+                "message" => "Data berhasil didapatkan",
+                "data" => $this->dbs->get_all('product order by price DESC')
+            ]);
+        }catch(\Exception $e){
+            http_response_code(500);
+            echo json_encode([
+                "status" => 500,
+                "message" => $e->getMessage(),
+                "data" => []
+            ]);
+        }
+        
+    }
+
+    public function get_search($keyword){
+        try{
+            http_response_code(200);
+            echo json_encode([
+                "status" => 200,
+                "message" => "Data berhasil didapatkan",
+                "data" => $this->dbs->get_all("product p JOIN category c ON p.kategori_id = c.id WHERE name like '%{$keyword}%' or kategori like '%{$keyword}%'")
+            ]);
+        }catch(\Exception $e){
+            http_response_code(500);
+            echo json_encode([
+                "status" => 500,
+                "message" => $e->getMessage(),
+                "data" => []
+            ]);
+        }
     }
 
     public function addData($data){
