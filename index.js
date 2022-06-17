@@ -186,7 +186,9 @@ function deleteData(id) {
         data: {
             id: id,
         },
+        success : ()=>{
+            productContainer.html("");
+            getData("", "");
+        }
     });
-    productContainer.html("");
-    getData("", "");
 }
