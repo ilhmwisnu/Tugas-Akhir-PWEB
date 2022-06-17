@@ -139,6 +139,23 @@ class Product{
             ]);
         }
     }
+
+
+    public function update($data, $id ){
+        $name = $data["name"];
+        $kategori_id = $data["kategori_id"];
+        $size = $data["size"];
+        $image = $data["image"];
+        $price = $data["price"];
+
+        echo $name + $kategori_id + $size + $image + $price;
+
+
+        $query = "UPDATE product SET image = '$image', name = '$name', size = '$size, price = $price, kategori_id = $kategori_id WHERE id = $id;";
+
+        return $this->dbs->update($query);
+
+    }
 }
 
 

@@ -18,7 +18,7 @@ function getData(keyword, sort) {
         // console.log(globalData.length);
         totalPage = Math.ceil(globalData.length / 8);
         // console.log(totalPage);
-        // console.log(globalData);
+        console.log(globalData);
         renderPagination(currentPage, totalPage);
         renderCard(currentPage, totalPage, globalData);
     });

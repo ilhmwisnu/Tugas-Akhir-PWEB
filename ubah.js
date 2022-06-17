@@ -19,7 +19,19 @@ function getParameter(parameterName) {
 
 let prodId = getParameter("id");
 
-fetch(`api/product.php?id=${prodId}`)
+fetch("./api/category.php").then(res => res.json()).then(
+  data => {
+    data = data["data"]
+    data.forEach(opt => {
+        kategori.innerHTML = kategori.innerHTML + `<option value="${opt.id}">${opt.kategori}</option>`
+    });
+    getProductData()
+  }
+)
+
+
+function getProductData(){
+  fetch(`api/product.php?id=${prodId}`)
     .then((res) => res.json())
     .then((data) => {
         data = data["data"][0];
@@ -40,16 +52,18 @@ fetch(`api/product.php?id=${prodId}`)
           }
         });
     });
+  }
+
 
 document.querySelector("#submit").addEventListener("click", async (e) => {
     e.preventDefault();
     let form = document.querySelector("#form");
     let formData = new FormData(form);
 
-    // fetch('api/product.php?action=update', {
-    //   method: 'post',
-    //   body: formData,
-    // });
+    fetch('api/product.php?action=update', {
+      method: 'post',
+      body: formData,
+    });
 
     alert("data telah ditambahkan");
     window.location.replace("index.html");

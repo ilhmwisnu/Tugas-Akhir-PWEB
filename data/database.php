@@ -49,6 +49,12 @@ class Database
         return $this->db->query($query);
     }
 
+
+    public function update($query)
+    {
+        return $this->db->query($query);
+    }
+
     public function getDataById($table, $id)
     {
         $query = "SELECT * FROM $table where id = $id";

@@ -1,3 +1,6 @@
+    
+    let kategoriOpt = document.querySelector('#kategori')
+
 document.querySelector('#submit').addEventListener('click', async (e) => {
   e.preventDefault();
   let form = document.querySelector('#form');
@@ -6,14 +9,22 @@ document.querySelector('#submit').addEventListener('click', async (e) => {
   fetch('./api/product.php?action=create', {
     method: 'post',
     body: formData,
-  });
+  }).catch((e)=>alert(e))
 
-  alert('data telah ditambahkan');
+  // alert('data telah ditambahkan');
   window.location.replace('index.html');
 });
 
 
-fetch
+fetch("./api/category.php").then(res => res.json()).then(
+  data => {
+    data = data["data"]
+    data.forEach(opt => {
+        kategoriOpt.innerHTML = kategoriOpt.innerHTML + `<option value="${opt.id}">${opt.kategori}</option>`
+      
+    });
+  }
+)
 
 
 document.querySelector("#ukuran").addEventListener("change", (e)=>{
