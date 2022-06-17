@@ -1,4 +1,4 @@
-let nama = document.querySelector("#nama");
+let nama = document.querySelector("#name");
 let imgUrl = document.querySelector("#imgInput");
 let kategori = document.querySelector("#kategori");
 let size = document.querySelector("#ukuran");
