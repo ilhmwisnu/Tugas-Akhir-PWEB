@@ -24,6 +24,8 @@ if(isset($_GET['sort'])){
         $product->delete($_POST["id"]);
     }
 
+}else if (isset($_GET["id"])) {
+    $product->getDataById($_GET["id"]);
 }else{
     $product->get();
 }

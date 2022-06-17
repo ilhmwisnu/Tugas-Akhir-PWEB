@@ -121,6 +121,24 @@ class Product{
             ]);   
         }
     }
+
+    public function getDataById($id){
+        try{
+            http_response_code(200);
+            echo json_encode([
+                "status" => 200,
+                "message" => "Data berhasil didapatkan",
+                "data" => $this->dbs->getDataById("product", $id)
+            ]);
+        }catch(\Exception $e){
+            http_response_code(500);
+            echo json_encode([
+                "status" => 500,
+                "message" => $e->getMessage(),
+                "data" => []
+            ]);
+        }
+    }
 }
 
 

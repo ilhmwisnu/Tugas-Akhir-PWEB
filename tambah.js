@@ -9,9 +9,11 @@ document.querySelector('#submit').addEventListener('click', async (e) => {
   });
 
   alert('data telah ditambahkan');
-  // window.location.replace('index.html');
+  window.location.replace('index.html');
 });
 
+
+fetch
 
 
 document.querySelector("#ukuran").addEventListener("change", (e)=>{
