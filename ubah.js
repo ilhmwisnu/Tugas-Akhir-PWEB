@@ -26,12 +26,19 @@ fetch(`api/product.php?id=${prodId}`)
         for (const key in data) {
             console.log(key + " : " + data[key]);
         }
-        nama.value = data["name"]
-        imgUrl.value = data["image"]
-        harga.value = data["price"]
-        kategori.value = data["kategori_id"]
-        // console.log(kategori.value =)
-        harga.value = data["price"]
+        nama.value = data["name"];
+        imgUrl.value = data["image"];
+        harga.value = data["price"];
+        kategori.value = data["kategori_id"];
+        harga.value = data["price"];
+        console.log(typeof size.options);
+        data["size"].split(",").forEach( ukuran => {
+          for (const key in size.options) {
+            if (size.options[key].value == ukuran) {
+              size.options[key].selected = true
+            }
+          }
+        });
     });
 
 document.querySelector("#submit").addEventListener("click", async (e) => {
