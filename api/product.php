@@ -19,7 +19,7 @@ if(isset($_GET['sort'])){
     if ($_GET['action']== "create") {
         $product->addData($_POST);
     }else if ($_GET['action']== "update") {
-        // update
+        $product->update($_POST,$_GET["id"]);
     }else if ($_GET['action']== "delete") {
         $product->delete($_POST["id"]);
     }

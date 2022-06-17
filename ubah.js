@@ -60,7 +60,7 @@ document.querySelector("#submit").addEventListener("click", async (e) => {
     let form = document.querySelector("#form");
     let formData = new FormData(form);
 
-    fetch('api/product.php?action=update', {
+    fetch(`api/product.php?action=update&id=${prodId}`, {
       method: 'post',
       body: formData,
     });

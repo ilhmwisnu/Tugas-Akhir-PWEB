@@ -148,10 +148,10 @@ class Product{
         $image = $data["image"];
         $price = $data["price"];
 
-        echo $name + $kategori_id + $size + $image + $price;
+        // echo $name + $kategori_id + $size + $image + $price;
 
 
-        $query = "UPDATE product SET image = '$image', name = '$name', size = '$size, price = $price, kategori_id = $kategori_id WHERE id = $id;";
+        $query = "UPDATE product SET image = '$image', name = '$name', size = '$size', price = $price, kategori_id = $kategori_id WHERE id = $id;";
 
         return $this->dbs->update($query);
 
