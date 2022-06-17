@@ -40,7 +40,11 @@ class Database
         $vals = [];
         foreach ($data as $key => $val) {
             array_push($keys, $key);
-            array_push($vals, "'" . $val . "'");
+            if ($key == "price" || $key == "kategori_id") {
+                array_push($vals,  $val );
+            }else{
+                array_push($vals, "'" . $val . "'");
+            }
         }
         $keys = "(" . implode(" ,", $keys) . ")";
         $vals = "(" . implode(" ,", $vals) . ")";
